@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -48,6 +48,9 @@ jobs:
           vendor/bin/mink-test-server &> logs/mink-test-server.log &
           while ! nc -z localhost 4444 </dev/null; do echo Waiting for remote driver to start...; sleep 1; done
           while ! nc -z localhost 8002 </dev/null; do echo Waiting for PHP server to start...; sleep 1; done
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Run Mink tests
         run: |
