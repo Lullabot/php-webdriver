@@ -1,0 +1,45 @@
+version: '3.6'
+
+services:
+  firefox:
+    container_name: ddev-${DDEV_SITENAME}-firefox
+    image: seleniarm/standalone-firefox:latest
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+    shm_size: 2gb
+    environment:
+      - VIRTUAL_HOST=$DDEV_HOSTNAME
+    links:
+      - web:web
+      - web:drupal_firefox
+    external_links:
+      - ddev-router:${DDEV_SITENAME}.${DDEV_TLD}
+    volumes:
+      - type: bind
+        source: ../
+        target: /var/www/html
+        consistency: cached
+      - ".:/mnt/ddev_config:ro"
+      - ddev-global-cache:/mnt/ddev-global-cache
+  chrome:
+    container_name: ddev-${DDEV_SITENAME}-chrome
+    image: seleniarm/standalone-chromium:latest
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+    shm_size: 2gb
+    environment:
+      - VIRTUAL_HOST=$DDEV_HOSTNAME
+    links:
+      - web:web
+      - web:drupal_chrome
+    external_links:
+      - ddev-router:${DDEV_SITENAME}.${DDEV_TLD}
+    volumes:
+      - type: bind
+        source: ../
+        target: /var/www/html
+        consistency: cached
+      - ".:/mnt/ddev_config:ro"
+      - ddev-global-cache:/mnt/ddev-global-cache

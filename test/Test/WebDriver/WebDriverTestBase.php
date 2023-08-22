@@ -42,7 +42,7 @@ abstract class WebDriverTestBase extends TestCase
     protected $testWebDriverRootUrl;
     protected $testWebDriverName;
 
-    private $testDocumentRootUrl = 'http://localhost';
+    private $testDocumentRootUrl = 'http://web';
 
     /**
      * {@inheritdoc}

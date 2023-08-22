@@ -54,58 +54,17 @@ class WebDriver extends AbstractWebDriver implements WebDriverInterface
             $parameters['capabilities']['alwaysMatch'] = $requiredCapabilities;
         }
 
-        try {
-            $result = $this->curl(
-                'POST',
-                '/session',
-                $parameters,
-                array(CURLOPT_FOLLOWLOCATION => true)
-            );
-        } catch (\Exception $e) {
-            // fallback to legacy JSON Wire Protocol
-            $capabilities = $desiredCapabilities ?: array();
-            $capabilities[Capability::BROWSER_NAME] = $browserName;
-
-            $parameters = array('desiredCapabilities' => $capabilities);
-
-            if (is_array($requiredCapabilities) && count($requiredCapabilities)) {
-                $parameters['requiredCapabilities'] = $requiredCapabilities;
-            }
-
-            $result = $this->curl(
-                'POST',
-                '/session',
-                $parameters,
-                array(CURLOPT_FOLLOWLOCATION => true)
-            );
-        }
+        $result = $this->curl(
+            'POST',
+            '/session',
+            $parameters,
+            array(CURLOPT_FOLLOWLOCATION => true)
+        );
 
         $this->capabilities = isset($result['value']['capabilities']) ? $result['value']['capabilities'] : null;
 
         $session = new Session($result['sessionUrl'], $this->capabilities);
 
         return $session;
-    }
-
-    /**
-     * Get Sessions: /sessions (GET)
-     * Get list of currently active sessions
-     *
-     * @deprecated
-     *
-     * @return array an array of \WebDriver\Session objects
-     */
-    public function sessions()
-    {
-        $result = $this->curl('GET', '/sessions');
-        $sessions = array();
-
-        foreach ($result['value'] as $session) {
-            $session = new Session($this->url . '/session/' . $session['id'], $this->capabilities);
-
-            $sessions[] = $session;
-        }
-
-        return $sessions;
     }
 }

@@ -11,11 +11,9 @@
     "homepage": "https://www.lullabot.com/",
     "license": "Apache-2.0",
     "require": {
-        "php": ">=5.3.2",
         "ext-curl": "*"
     },
     "require-dev": {
-        "php": ">=7.1",
         "phpunit/phpunit": "^8.5 || ^9.5"
     },
     "minimum-stability": "dev",

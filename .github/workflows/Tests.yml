@@ -8,7 +8,7 @@ on:
       - main
 
 env:
-  DRIVER_URL: "http://localhost:4444/wd/hub"
+  DRIVER_URL: "http://firefox:4444/wd/hub"
 
 jobs:
   Mink:
