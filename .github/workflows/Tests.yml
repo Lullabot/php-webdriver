@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 env:
   DRIVER_URL: "http://firefox:4444/wd/hub"
 
@@ -48,9 +52,6 @@ jobs:
           vendor/bin/mink-test-server &> logs/mink-test-server.log &
           while ! nc -z localhost 4444 </dev/null; do echo Waiting for remote driver to start...; sleep 1; done
           while ! nc -z localhost 8002 </dev/null; do echo Waiting for PHP server to start...; sleep 1; done
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run Mink tests
         run: |
