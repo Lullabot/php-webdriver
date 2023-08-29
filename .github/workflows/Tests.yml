@@ -13,33 +13,15 @@ concurrency:
 
 jobs:
   Mink:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        php: [ '7.2', '7.3', '7.4', '8.0', '8.1' ]
-        include:
-          - selenium: 'latest'
-            php: 'latest'
-      fail-fast: false
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "${{ matrix.php }}"
-          tools: composer
-          ini-values: error_reporting=-1, display_errors=On
+      - uses: ddev/github-action-setup-ddev@v1
 
       - name: Install dependencies
-        run: composer install
-
-      - name: Start Selenium
-        run: |
-          mkdir logs
-          docker run --net host --name firefox --volume /dev/shm:/dev/shm --shm-size 2g "seleniarm/standalone-firefox:${{ matrix.selenium }}" &> logs/selenium-firefox.log &
-          docker run --net host --name chrome --volume /dev/shm:/dev/shm --shm-size 2g "seleniarm/standalone-chrome:${{ matrix.selenium }}" &> logs/selenium-chrome.log &
+        run: ddev composer install
 
       - name: Run tests
-        run: ./vendor/bin/phpunit test/Test/WebDriver/SeleniumWebDriverTest.php
+        run: ddev exec phpunit test/Test/WebDriver/SeleniumWebDriverTest.php
