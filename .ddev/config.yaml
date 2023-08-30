@@ -15,10 +15,14 @@ web_environment: []
 nodejs_version: "18"
 webimage_extra_packages:
     - chromium-driver
+    - firefox-esr
 web_extra_daemons:
     - name: "chromedriver"
       command: "/usr/bin/chromedriver --verbose"
       directory: "/usr/bin"
+    - name: "geckodriver"
+      command: "/usr/local/bin/geckodriver -b /usr/bin/firefox"
+      directory: "/usr/local/bin/"
 
 # Key features of ddev's config.yaml:
 

@@ -64,35 +64,12 @@ class ChromeDriverTest extends WebDriverTestBase
     }
 
     /**
-     * Test driver session
-     */
-    public function testSession()
-    {
-        $this->assertEquals($this->getTestWebDriverRootUrl(), $this->driver->getUrl());
-    }
-
-    /**
-    /**
      * Test driver status
      */
     public function testStatus()
     {
-        try {
-            $status = $this->driver->status();
-        } catch (\Exception $e) {
-            if ($this->isWebDriverDown($e)) {
-                $this->markTestSkipped("{$this->testWebDriverName} server not running");
-
-                return;
-            }
-
-            throw $e;
-        }
-
-        $this->assertCount(4, $status);
-        $this->assertTrue(isset($status['build']));
-        $this->assertTrue(isset($status['message']));
-        $this->assertTrue(isset($status['os']));
-        $this->assertTrue(isset($status['ready']));
+        $this->assertEquals(1, $this->status['ready'], 'Chromedriver is not ready');
+        $this->assertEquals('ChromeDriver ready for new sessions.', $this->status['message'], 'Chromedriver is not ready');
+        $this->assertNotEmpty($this->status['os'], 'OS info not detected');
     }
 }

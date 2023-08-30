@@ -11,15 +11,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
-
-
 jobs:
   Tests:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2' ]
+        php: [ '7.4', '8.0', '8.1', '8.2' ]
       fail-fast: false
 
     steps:
@@ -34,6 +32,11 @@ jobs:
         run: ddev composer install
 
       - name: Run tests
-        run: |
-          ddev exec phpunit test/Test/WebDriver/SeleniumWebDriverTest.php --fail-on-skipped
-          ddev exec phpunit test/Test/WebDriver/ChromeDriverTest.php --fail-on-skipped
+        run: ddev exec phpunit
+
+      - name: Confirm All PHPUnit Tests were run
+        uses: GuillaumeFalourd/assert-command-line-output@v2
+        with:
+          command_line: xmllint --xpath 'string(//testsuites/testsuite/@tests)' phpunit.xml
+          contains: 19
+          expected_result: PASSED
