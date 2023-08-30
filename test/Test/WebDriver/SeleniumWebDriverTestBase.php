@@ -15,24 +15,6 @@ abstract class SeleniumWebDriverTestBase extends WebDriverTestBase
     protected $testWebDriverName = 'selenium';
     protected $status = null;
 
-    /**
-     * Run before each test.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        try {
-            $this->status = $this->driver->status();
-            $this->session = $this->driver->session();
-        }
-        catch (\Exception $e) {
-            if ($this->isWebDriverDown($e)) {
-                $this->fail("{$this->testWebDriverName} server not running: {$e->getMessage()}");
-            }
-            throw $e;
-        }
-    }
-
    /**
     * Test driver status
     */

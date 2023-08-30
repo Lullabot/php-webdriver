@@ -38,5 +38,5 @@ jobs:
         uses: GuillaumeFalourd/assert-command-line-output@v2
         with:
           command_line: xmllint --xpath 'string(//testsuites/testsuite/@tests)' phpunit-results.xml
-          contains: 19
+          contains: 25
           expected_result: PASSED
