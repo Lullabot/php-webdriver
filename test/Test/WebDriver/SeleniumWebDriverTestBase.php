@@ -2,14 +2,6 @@
 
 namespace Test\WebDriver;
 
-use WebDriver\Exception\CurlExec;
-use WebDriver\Exception\NoSuchElement;
-use WebDriver\Service\CurlService;
-use WebDriver\ServiceFactory;
-use WebDriver\Exception\UnknownCommand;
-use WebDriver\WebDriver;
-use WebDriver\Session;
-
 /**
  * Selenium WebDriver
  *
@@ -17,9 +9,9 @@ use WebDriver\Session;
  *
  * @group Functional
  */
-class SeleniumWebDriverTest extends WebDriverTestBase
+abstract class SeleniumWebDriverTestBase extends WebDriverTestBase
 {
-    protected $testWebDriverRootUrl = 'http://firefox:4444';
+    protected $testWebDriverRootUrl = '';
     protected $testWebDriverName = 'selenium';
     protected $status = null;
 
