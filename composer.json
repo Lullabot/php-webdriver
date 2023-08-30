@@ -1,5 +1,5 @@
 {
-    "name": "lullabot/php-webdriver",
+    "name": "instaclick/php-webdriver",
     "type": "library",
     "description": "PHP WebDriver for Selenium 2",
     "keywords": [
