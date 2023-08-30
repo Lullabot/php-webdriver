@@ -44,7 +44,7 @@ class SeleniumWebDriverTest extends WebDriverTestBase
     /**
      * Test driver sessions
      */
-    public function testSessions()
+    public function testSession()
     {
         $this->assertEquals($this->getTestWebDriverRootUrl(), $this->driver->getUrl());
     }

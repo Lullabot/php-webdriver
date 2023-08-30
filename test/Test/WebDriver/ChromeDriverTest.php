@@ -23,6 +23,7 @@
 namespace Test\WebDriver;
 
 use Test\WebDriver\WebDriverTestBase;
+use WebDriver\Browser;
 use WebDriver\Session;
 
 /**
@@ -37,24 +38,37 @@ class ChromeDriverTest extends WebDriverTestBase
     protected $testWebDriverRootUrl = 'http://localhost:9515';
     protected $testWebDriverName    = 'chromedriver';
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        try {
+            $this->status = $this->driver->status();
+            $this->session = $this->driver->session(Browser::CHROME, [
+                'goog:chromeOptions' => [
+                    'w3c' => true,
+                    'args' => [
+                        '--no-sandbox',
+                        '--ignore-certificate-errors',
+                        '--allow-insecure-localhost',
+                        '--headless',
+                    ],
+                ],
+            ]);
+        }
+        catch (\Exception $e) {
+            if ($this->isWebDriverDown($e)) {
+                $this->fail("{$this->testWebDriverName} server not running: {$e->getMessage()}");
+            }
+            throw $e;
+        }
+    }
+
     /**
      * Test driver session
      */
     public function testSession()
     {
-        try {
-            $this->session = $this->driver->session();
-        } catch (\Exception $e) {
-            if ($this->isWebDriverDown($e)) {
-                $this->markTestSkipped("{$this->testWebDriverName} server not running");
-
-                return;
-            }
-
-            throw $e;
-        }
-
-        $this->assertTrue($this->session instanceof Session);
+        $this->assertEquals($this->getTestWebDriverRootUrl(), $this->driver->getUrl());
     }
 
     /**

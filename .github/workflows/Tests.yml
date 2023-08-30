@@ -34,4 +34,6 @@ jobs:
         run: ddev composer install
 
       - name: Run tests
-        run: ddev exec phpunit test/Test/WebDriver/SeleniumWebDriverTest.php
+        run: |
+          ddev exec phpunit test/Test/WebDriver/SeleniumWebDriverTest.php --fail-on-skipped
+          ddev exec phpunit test/Test/WebDriver/ChromeDriverTest.php --fail-on-skipped

@@ -15,6 +15,10 @@ web_environment: []
 nodejs_version: "18"
 webimage_extra_packages:
     - chromium-driver
+web_extra_daemons:
+    - name: "chromedriver"
+      command: "/usr/bin/chromedriver --verbose"
+      directory: "/usr/bin"
 
 # Key features of ddev's config.yaml:
 
