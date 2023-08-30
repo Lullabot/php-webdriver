@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -37,6 +39,6 @@ jobs:
       - name: Confirm All PHPUnit Tests were run
         uses: GuillaumeFalourd/assert-command-line-output@v2
         with:
-          command_line: xmllint --xpath 'string(//testsuites/testsuite/@tests)' phpunit-results.xml
+          command_line: xmllint --xpath 'string(//testsuites/testsuite/@testcase)' phpunit-results.xml
           contains: 25
           expected_result: PASSED
