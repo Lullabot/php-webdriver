@@ -40,6 +40,9 @@ class WebDriver extends AbstractWebDriver implements WebDriverInterface
      */
     public function session($browserName = Browser::FIREFOX, $desiredCapabilities = null, $requiredCapabilities = null)
     {
+        // Unset "name" as this isn't W3 spec and will cause the request to fail.
+        unset($requiredCapabilities['name']);
+        unset($desiredCapabilities['name']);
         // default to W3C WebDriver API
         $firstMatch = $desiredCapabilities ?: array();
         $firstMatch['browserName'] = $browserName;
