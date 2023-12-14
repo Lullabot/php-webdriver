@@ -21,6 +21,8 @@ namespace WebDriver;
  * @method void postPosition($json) Change position of the window.
  * @method array getSize() Get size of the window.
  * @method void postSize($json) Change the size of the window.
+ * @method array getRect() Get the size and position of the window corresponding to the current top-level browsing context.
+ * @method void postRect($jsonSize) Set the size and the position of the window corresponding to the current top-level browsing context.
  */
 class LegacyWindow extends AbstractWebDriver
 {

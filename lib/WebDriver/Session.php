@@ -39,8 +39,6 @@ namespace WebDriver;
  * @method void postLocation($jsonCoordinates) Set the current geo location.
  * @method string getOrientation() Get the current browser orientation.
  * @method void postOrientation($jsonOrientation) Set the current browser orientation.
- * @method array getRect() Get the size and position of the window corresponding to the current top-level browsing context.
- * @method void postRect($jsonSize) Set the size and the position of the window corresponding to the current top-level browsing context.
  * @method array print() Print page.
  * @method void refresh() Refresh the current page.
  * @method string screenshot() Take a screenshot of the current page.
