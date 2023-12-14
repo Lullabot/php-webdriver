@@ -32,6 +32,7 @@ namespace WebDriver;
  * @method void dismiss_alert() Dismisses the currently displayed alert dialog.
  * @method void doubleclick() Double-clicks at the current mouse coordinates (set by moveto).
  * @method array execute_sql($jsonQuery) Execute SQL.
+ * @method array execute_async($jsonScript) Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.
  * @method string file($jsonFile) Upload file.
  * @method void forward() Navigates forward in the browser history, if possible.
  * @method void keys($jsonKeys) Send a sequence of key strokes to the active element.
