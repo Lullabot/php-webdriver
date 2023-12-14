@@ -32,13 +32,15 @@ namespace WebDriver;
  * @method void dismiss_alert() Dismisses the currently displayed alert dialog.
  * @method void doubleclick() Double-clicks at the current mouse coordinates (set by moveto).
  * @method array execute_sql($jsonQuery) Execute SQL.
- * @method array file($jsonFile) Upload file.
+ * @method string file($jsonFile) Upload file.
  * @method void forward() Navigates forward in the browser history, if possible.
  * @method void keys($jsonKeys) Send a sequence of key strokes to the active element.
  * @method array getLocation() Get the current geo location.
  * @method void postLocation($jsonCoordinates) Set the current geo location.
  * @method string getOrientation() Get the current browser orientation.
  * @method void postOrientation($jsonOrientation) Set the current browser orientation.
+ * @method array getRect() Get the size and position of the window corresponding to the current top-level browsing context.
+ * @method void postRect($jsonSize) Set the size and the position of the window corresponding to the current top-level browsing context.
  * @method array print() Print page.
  * @method void refresh() Refresh the current page.
  * @method string screenshot() Take a screenshot of the current page.
