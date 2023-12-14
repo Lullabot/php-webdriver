@@ -37,6 +37,7 @@ namespace WebDriver;
  * @method void keys($jsonKeys) Send a sequence of key strokes to the active element.
  * @method array getLocation() Get the current geo location.
  * @method void postLocation($jsonCoordinates) Set the current geo location.
+ * @method void moveto($jsonElementCoordinates) Move the mouse by an offset of the specified element.
  * @method string getOrientation() Get the current browser orientation.
  * @method void postOrientation($jsonOrientation) Set the current browser orientation.
  * @method array print() Print page.
