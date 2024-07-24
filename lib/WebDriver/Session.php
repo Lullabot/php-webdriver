@@ -563,10 +563,12 @@ class Session extends Container
      *              : /session/:sessionId/file (POST)
      *
      * @param array $arguments
+     *   An array with a single key/value. The key should be 'file' and the
+     *   value should be a string containing base64 encoded contents of a file.
      *
      * @return mixed
      */
-    public function file($arguments)
+    public function file(array $arguments)
     {
         // Since Selenium 4.17 the file URL has been prefixed with /se because
         // it is not a W3C command. See
