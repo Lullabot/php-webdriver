@@ -560,6 +560,33 @@ class Session extends Container
     }
 
     /**
+     * Upload a file: /session/:sessionId/se/file (POST)
+     *              : /session/:sessionId/file (POST)
+     *
+     * @param array $arguments
+     *
+     * @return mixed
+     */
+    public function file($arguments)
+    {
+        // Since Selenium 4.17 the file URL has been prefixed with /se because
+        // it is not a W3C command.
+        if ($this->isW3C()) {
+            try {
+                $result = $this->curl('POST', '/se/file', $arguments);
+            } catch (Exception $e) {
+            }
+        }
+
+        // Fallback to pre Selenium 4.17 behaviour and non W3C behaviour.
+        if (!isset($result)) {
+            $result = $this->curl('POST', '/file', $arguments);
+        }
+
+        return $result['value'];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function __call($name, $arguments)
