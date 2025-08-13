@@ -132,7 +132,7 @@ class CurlService implements CurlServiceInterface
             throw $e;
         }
 
-        curl_close($curl);
+        $curl = null;
 
         return array($rawResult, $info);
     }
