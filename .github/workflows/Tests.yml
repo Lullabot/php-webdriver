@@ -17,7 +17,8 @@ jobs:
 
     strategy:
       matrix:
-        php: [ '8.0', '8.3' ]
+        # Changes here might also require changes to .ddev/config.yaml.
+        php: [ '8.0', '8.4' ]
       fail-fast: false
 
     steps:
