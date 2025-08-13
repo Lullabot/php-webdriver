@@ -32,4 +32,6 @@ namespace Test\WebDriver;
 class ChromeDriverNonW3CTest extends ChromeDriverTest
 {
     protected $w3c = false;
+    protected $testWebDriverRootUrl = 'http://oldchrome:4444';
+
 }
