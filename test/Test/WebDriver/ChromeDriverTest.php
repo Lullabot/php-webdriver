@@ -35,7 +35,7 @@ use WebDriver\Session;
  */
 class ChromeDriverTest extends WebDriverTestBase
 {
-    protected $testWebDriverRootUrl = 'http://localhost:9515';
+    protected $testWebDriverRootUrl = 'http://chrome:4444';
     protected $testWebDriverName    = 'chromedriver';
     protected $w3c = true;
     protected $status = null;
@@ -71,8 +71,7 @@ class ChromeDriverTest extends WebDriverTestBase
     public function testStatus()
     {
         $this->assertEquals(1, $this->status['ready'], 'Chromedriver is not ready');
-        $this->assertEquals('ChromeDriver ready for new sessions.', $this->status['message'], 'Chromedriver is not ready');
-        $this->assertNotEmpty($this->status['os'], 'OS info not detected');
+        $this->assertEquals('Selenium Grid ready.', $this->status['message'], 'Chromedriver is not ready');
         $this->assertSame($this->w3c, $this->session->isW3c());
     }
 }
